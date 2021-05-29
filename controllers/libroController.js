@@ -33,18 +33,14 @@ app.post('/libro', async (req, res) => {
             "nombre": req.body.nombre.toUpperCase(),
             "categoria_id": req.body.categoria_id,
             "descripcion": req.body.descripcion,
-            "persona_id": req.body.persona_id
+            "persona_id": req.body.persona_id,
+            "subtitulo": req.body.subtitulo
         }
 
         let respuesta = await libroService.nuevoLibro(libro);
-        res.status(200).send({
-            Nombre: libro.nombre,
-            id_libro: respuesta.insertId,
-            Descripcion: libro.descripcion,
-            Categoria_id: libro.idCategoria,
-            persona_id: libro.persona_id
-        });
-    } catch (e) {   
+        res.status(200).send('El libro ' + libro.nombre + ' se agrego con exito');
+
+        }catch (e) {   
         console.log(e.message);
         res.status(413).send({
             error: e.message
